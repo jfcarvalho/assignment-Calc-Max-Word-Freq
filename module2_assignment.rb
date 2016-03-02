@@ -31,11 +31,12 @@ class LineAnalyzer
 		end 
 		}  
      #puts words
-     #puts @highest_wf_count
-     #puts @highest_wf_words
+     puts @highest_wf_count
+     puts @highest_wf_words
  end
  
 end
+
   #Implement the following read-only attributes in the LineAnalyzer class. 
   #* highest_wf_count - a number with maximum number of occurrences for a single word (calculated)
   #* highest_wf_words - an array of words with the maximum number of occurrences (calculated)
@@ -61,7 +62,45 @@ end
 
 #  Implement a class called Solution. 
 class Solution
-
+  attr_reader :analyzers
+  attr_reader :highest_count_across_lines
+  attr_reader :highest_count_words_across_lines
+  
+  def initialize()
+	@analyzers = Array.new
+	@highest_count_across_lines = 0
+  end
+  
+  def analyze_file()
+	line_number = 0
+	File.foreach('test.txt') do |line|
+		line_number += 1 
+		@analyzers.push(LineAnalyzer.new(line,line_number))
+	end
+	#puts @analyzers[1].content
+	#puts @analyzers[1].highest_wf_count
+  end
+  
+  def calculate_line_with_highest_frequency()
+ 
+	@analyzers.each{|content|
+		if content.highest_wf_count > @highest_count_across_lines
+			@highest_count_across_lines = content.highest_wf_count 
+		end	
+	}
+	@analyzers.each {|element|
+		if element.highest_wf_count == @highest_count_across_lines
+			@highest_count_words_across_lines = element.highest_wf_words
+		end
+	}
+  end
+  
+  def print_highest_word_frequency_across_lines()
+	puts @highest_count_words_across_lines
+  end
+  
+  
+  
   # Implement the following read-only attributes in the Solution class.
   #* analyzers - an array of LineAnalyzer objects for each line in the file
   #* highest_count_across_lines - a number with the maximum value for highest_wf_words attribute in the analyzers array.
@@ -89,6 +128,10 @@ class Solution
   #* print the values of objects in highest_count_words_across_lines in the specified format
 end
 
-teste = LineAnalyzer.new("Isso é um teste isso isso isso! teste teste",1)
-
+#s1 = Solution.new
+#s1.analyze_file
+#s1.calculate_line_with_highest_frequency
+#s1.print_highest_word_frequency_across_lines
+l = LineAnalyzer.new("This is a really really really cool experiment really", 1)
+l.calculate_word_frequency
 
