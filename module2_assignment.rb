@@ -134,6 +134,5 @@ s1 = Solution.new
 s1.analyze_file
 s1.calculate_line_with_highest_frequency
 s1.print_highest_word_frequency_across_lines
-#l = LineAnalyzer.new("This is a really really really cool experiment really", 1)
 
 
