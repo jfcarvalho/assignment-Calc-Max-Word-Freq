@@ -10,16 +10,29 @@ class LineAnalyzer
  def initialize(content, line_number)
 	@content = content
 	@line_number = line_number
-	@highest_wf_words = Hash.new(0)
+	@highest_wf_words = Array.new
+	@highest_wf_count = 0 
 	calculate_word_frequency()
-	
 	end
 	
  def calculate_word_frequency()
+	words = Hash.new(0)
 	@content.split.each do |word|
-		highest_wf_words[word.downcase] += 1	
-     end
-     puts highest_wf_words
+		words[word.downcase] += 1
+		if 	words[word.downcase] > @highest_wf_count
+			@highest_wf_count = words[word.downcase]
+		end
+	end	
+	
+	
+     words.each {|value, key| 
+     if key == @highest_wf_count 
+		highest_wf_words.push(value) 
+		end 
+		}  
+     #puts words
+     #puts @highest_wf_count
+     #puts @highest_wf_words
  end
  
 end
@@ -76,5 +89,6 @@ class Solution
   #* print the values of objects in highest_count_words_across_lines in the specified format
 end
 
+teste = LineAnalyzer.new("Isso é um teste isso isso isso! teste teste",1)
 
 
