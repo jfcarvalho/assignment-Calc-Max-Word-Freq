@@ -31,8 +31,8 @@ class LineAnalyzer
 		end 
 		}  
      #puts words
-     puts @highest_wf_count
-     puts @highest_wf_words
+     #puts @highest_wf_count
+     #puts @highest_wf_words
  end
  
 end
@@ -69,6 +69,7 @@ class Solution
   def initialize()
 	@analyzers = Array.new
 	@highest_count_across_lines = 0
+	@highest_count_words_across_lines = Array.new
   end
   
   def analyze_file()
@@ -90,7 +91,8 @@ class Solution
 	}
 	@analyzers.each {|element|
 		if element.highest_wf_count == @highest_count_across_lines
-			@highest_count_words_across_lines = element.highest_wf_words
+			puts element.highest_wf_count
+			@highest_count_words_across_lines.push(element.highest_wf_words)
 		end
 	}
   end
@@ -128,10 +130,10 @@ class Solution
   #* print the values of objects in highest_count_words_across_lines in the specified format
 end
 
-#s1 = Solution.new
-#s1.analyze_file
-#s1.calculate_line_with_highest_frequency
-#s1.print_highest_word_frequency_across_lines
-l = LineAnalyzer.new("This is a really really really cool experiment really", 1)
-l.calculate_word_frequency
+s1 = Solution.new
+s1.analyze_file
+s1.calculate_line_with_highest_frequency
+s1.print_highest_word_frequency_across_lines
+#l = LineAnalyzer.new("This is a really really really cool experiment really", 1)
+
 
