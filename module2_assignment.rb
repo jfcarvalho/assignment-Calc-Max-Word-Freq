@@ -19,15 +19,15 @@ class LineAnalyzer
 	words = Hash.new(0)
 	@content.split.each do |word|
 		words[word.downcase] += 1
-		if 	words[word.downcase] > @highest_wf_count
+		if 	words[word.downcase] > @highest_wf_count #and words[word.downcase] > 1
 			@highest_wf_count = words[word.downcase]
 		end
 	end	
 	
 	@highest_wf_words = Array.new
      words.each {|value, key| 
-     if key == @highest_wf_count 
-		highest_wf_words.push(value) 
+     if key == @highest_wf_count and key > 1 
+			highest_wf_words.push(value) 
 		end 
 		}  
  
@@ -72,8 +72,9 @@ class Solution
   def print_highest_word_frequency_across_lines()
 	puts "The following words have the highest word frequency per line:"
 	@analyzers.each {|element|
-	puts "#{element.highest_wf_words} appers in line #{element.line_number}"
-	
+	if !element.highest_wf_words.empty? 
+		puts "#{element.highest_wf_words} appers in line #{element.line_number}"
+	end
 	}
 	end
 end
